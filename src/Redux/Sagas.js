@@ -1,10 +1,8 @@
 import { all } from 'redux-saga/effects';
-import { HomeSagas } from '../Sections/Home';
-import { InitialLoadingSagas } from '../Sections/InitialLoading';
+import { AuthSagas } from '../Sections/Auth';
 
 export default function* rootSaga() {
     yield all([
-        ...HomeSagas,
-        ...InitialLoadingSagas
+        ...AuthSagas
     ]);
 }

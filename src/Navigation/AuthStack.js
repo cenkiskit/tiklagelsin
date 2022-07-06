@@ -15,12 +15,6 @@ const AuthStack = () => {
                 options={{
                     headerShown: false
                 }} />
-            <Stack.Screen
-                name={ScreenNames.HOME.HOME_SCREEN}
-                component={HomeScreen}
-                options={{
-                    headerShown: false
-                }} />
         </Stack.Navigator>
     )
 }

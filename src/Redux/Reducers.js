@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
-import { HomeNamespace, HomeReducer } from '../Sections/Home';
-import { InitialLoadingNamespace, InitialLoadingReducer } from '../Sections/InitialLoading';
+import { AuthNamespace, AuthReducer } from '../Sections/Auth';
 
 export default combineReducers({
-    [HomeNamespace]: HomeReducer,
-    [InitialLoadingNamespace]: InitialLoadingReducer
+    [AuthNamespace]: AuthReducer
 });
 

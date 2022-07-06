@@ -6,12 +6,16 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import LoginButton from '../Components/LoginButton'
 import { styles } from '../Styles/LoginScreenStyles'
 import { isEmail } from '../Utils/EmailUtils'
+import { useDispatch } from 'react-redux'
+import { AuthActions } from '..'
 
 const LoginScreen = () => {
 
-    const [mail, setMail] = useState("")
-    const [password, setPassword] = useState("")
+    const [mail, setMail] = useState("cenk.iskit1@gmail.com")
+    const [password, setPassword] = useState("12345")
     const [wrognEmail, setWrongEmail] = useState(false)
+
+    const dispatch = useDispatch()
 
     const _onChangeEmail = (text) => {
         setMail(text)
@@ -22,16 +26,14 @@ const LoginScreen = () => {
     }
 
     const _onPressLogin = () => {
-        const isMail = isEmail()
-        if (isMail) {
-            wrognEmail ? setWrongEmail(false) : null
-        } else {
-            setWrongEmail(true)
-        }
+        dispatch(AuthActions.fetchLogin({
+            mail: mail,
+            password: password
+        }))
     }
 
     const _onBlurMail = () => {
-        const isMail = isEmail()
+        const isMail = isEmail(mail)
         if (isMail) {
             wrognEmail ? setWrongEmail(false) : null
         } else {

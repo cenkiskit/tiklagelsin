@@ -10,14 +10,20 @@ import React from 'react';
 import {
   View
 } from 'react-native';
+import { Provider } from 'react-redux';
 import RootNavigator from './src/Navigation/RootNavigator';
+import createStore from './src/Redux/CreateStore';
 
 const App = () => {
 
+  const { store } = createStore()
+
   return (
-    <View style={{ flex: 1 }}>
-      <RootNavigator />
-    </View>
+    <Provider store={store}>
+      <View style={{ flex: 1 }}>
+        <RootNavigator />
+      </View>
+    </Provider>
   );
 };
 

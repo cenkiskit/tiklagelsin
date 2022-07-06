@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import LoginHeader from '../Components/LoginHeader'
 import LoginInput from '../Components/LoginInput'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LoginButton from '../Components/LoginButton'
 import { styles } from '../Styles/LoginScreenStyles'
+import { isEmail } from '../Utils/EmailUtils'
 
 const LoginScreen = () => {
 
@@ -21,18 +22,31 @@ const LoginScreen = () => {
     }
 
     const _onPressLogin = () => {
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-        if (reg.test(mail) === false) {
-            setWrongEmail(true)
-        } else {
+        const isMail = isEmail()
+        if (isMail) {
             wrognEmail ? setWrongEmail(false) : null
-            //TODO: burada anasayfaya yönlendirme yap.
+        } else {
+            setWrongEmail(true)
         }
     }
 
-    useEffect(() => {
+    const _onBlurMail = () => {
+        const isMail = isEmail()
+        if (isMail) {
+            wrognEmail ? setWrongEmail(false) : null
+        } else {
+            setWrongEmail(true)
+        }
+    }
 
-    }, [])
+    const _onFocusMail = () => {
+        setWrongEmail(false)
+    }
+
+    const isButtonDisabled = () => {
+        if (mail && password) return false
+        return true
+    }
 
     return (
         <View style={styles.container}>
@@ -44,10 +58,15 @@ const LoginScreen = () => {
                 showsVerticalScrollIndicator={false} >
                 <LoginHeader />
                 <View style={styles.inputContainer}>
-                    <LoginInput
-                        placeholder="E-mail"
-                        onChangeText={_onChangeEmail}
-                        value={mail} />
+                    <View>
+                        <LoginInput
+                            placeholder="E-mail"
+                            onChangeText={_onChangeEmail}
+                            value={mail}
+                            wrong={wrognEmail}
+                            onBlur={_onBlurMail}
+                            onFocus={_onFocusMail} />
+                    </View>
                     <View style={styles.passwordContainer}>
                         <LoginInput
                             placeholder="Şifre"
@@ -58,6 +77,7 @@ const LoginScreen = () => {
                 </View>
                 <View style={styles.buttonContainer}>
                     <LoginButton
+                        disabled={isButtonDisabled}
                         onPress={_onPressLogin} />
                 </View>
             </KeyboardAwareScrollView>

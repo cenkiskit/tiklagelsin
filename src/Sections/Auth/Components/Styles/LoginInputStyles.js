@@ -8,5 +8,13 @@ export const styles = StyleSheet.create({
         borderRadius: deviceWidth,
         paddingLeft: deviceWidth * 0.05,
         borderColor: tiklagelsinColor
+    },
+    wrongTextContainer: {
+        paddingLeft: deviceWidth * 0.05,
+        marginTop: deviceWidth * 0.01,
+    },
+    wrongText: {
+        color: tiklagelsinColor,
+        fontWeight:'bold'
     }
 })

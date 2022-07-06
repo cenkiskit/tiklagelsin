@@ -8,10 +8,7 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                // ...horizontalTransition,
-            }}>
+        <Stack.Navigator>
             <Stack.Screen
                 name={ScreenNames.AUTH.LOGIN_SCREEN}
                 component={LoginScreen}
@@ -24,7 +21,6 @@ const AuthStack = () => {
                 options={{
                     headerShown: false
                 }} />
-
         </Stack.Navigator>
     )
 }

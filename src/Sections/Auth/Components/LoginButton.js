@@ -4,11 +4,12 @@ import { styles } from './Styles/LoginButtonStyles'
 
 const LoginButton = (props) => {
 
-    const { onPress } = props
+    const { onPress, disabled } = props
 
     return (
         <View style={styles.container}>
             <TouchableOpacity
+                disabled={disabled()}
                 onPress={() => onPress()}
                 style={styles.button}>
                 <Text style={styles.text}>
@@ -20,7 +21,8 @@ const LoginButton = (props) => {
 }
 
 LoginButton.defaultProps = {
-    onPress: () => {}
+    onPress: () => { },
+    disabled: false
 }
 
 export default LoginButton

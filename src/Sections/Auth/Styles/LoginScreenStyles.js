@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         marginTop: deviceWidth * 0.1
     },
     passwordContainer: {
-        marginTop: deviceWidth * 0.1
+        marginTop: deviceWidth * 0.03
     },
     buttonContainer: {
         flex: 0.5,

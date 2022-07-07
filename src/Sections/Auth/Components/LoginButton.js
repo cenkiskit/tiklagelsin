@@ -11,7 +11,7 @@ const LoginButton = (props) => {
             <TouchableOpacity
                 disabled={disabled()}
                 onPress={() => onPress()}
-                style={styles.button}>
+                style={[styles.button, disabled() ? { backgroundColor: '#d49898' } : null]}>
                 <Text style={styles.text}>
                     Giriş Yap
                 </Text>

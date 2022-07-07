@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import {
   View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider, useDispatch } from 'react-redux';
 import RootNavigator from './src/Navigation/RootNavigator';
 import createStore from './src/Redux/CreateStore';
@@ -20,9 +21,9 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <RootNavigator />
-      </View>
+      </SafeAreaView>
     </Provider>
   );
 };

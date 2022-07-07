@@ -8,6 +8,7 @@ import { styles } from '../Styles/LoginScreenStyles'
 import { isEmail } from '../Utils/EmailUtils'
 import { useDispatch } from 'react-redux'
 import { AuthActions } from '..'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const LoginScreen = () => {
 
@@ -51,7 +52,7 @@ const LoginScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAwareScrollView
                 contentContainerStyle={styles.keyboardViewContainer}
                 enableOnAndroid
@@ -84,7 +85,7 @@ const LoginScreen = () => {
                 </View>
             </KeyboardAwareScrollView>
 
-        </View >
+        </SafeAreaView >
     )
 }
 

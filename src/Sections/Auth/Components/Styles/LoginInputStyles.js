@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { deviceWidth, tiklagelsinColor } from "../../../../Constants/Layout";
 
 export const styles = StyleSheet.create({
@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: deviceWidth,
         paddingLeft: deviceWidth * 0.05,
+        padding: Platform.OS === 'ios' ? deviceWidth * 0.04 : 0,
         borderColor: tiklagelsinColor
     },
     wrongTextContainer: {
@@ -15,6 +16,6 @@ export const styles = StyleSheet.create({
     },
     wrongText: {
         color: tiklagelsinColor,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     }
 })

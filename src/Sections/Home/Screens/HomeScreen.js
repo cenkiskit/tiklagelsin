@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { deviceWidth } from '../../../Constants/Layout'
+import { deviceWidth, tiklagelsinColor } from '../../../Constants/Layout'
 import ProductHeader from '../Components/ProductHeader'
+import ProductList from '../Components/ProductList'
 import Search from '../Components/Search'
 
 const HomeScreen = () => {
@@ -14,7 +15,7 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{
         backgroundColor: 'white',
         width: deviceWidth,
@@ -25,6 +26,7 @@ const HomeScreen = () => {
           onChange={_onChangeSearch}
           value={searchText} />
       </View>
+      <ProductList />
     </SafeAreaView>
   )
 }

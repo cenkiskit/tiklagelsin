@@ -46,7 +46,9 @@ export const styles = StyleSheet.create({
     countText: {
         position: 'absolute',
         top: 0,
-        right: 0
+        right: 0,
+        color: tiklagelsinColor,
+        fontWeight:'bold'
     }
 
 })

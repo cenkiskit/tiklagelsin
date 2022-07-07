@@ -1,11 +1,19 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { deviceWidth, tiklagelsinColor } from '../../../Constants/Layout'
+import ProductHeader from '../Components/ProductHeader'
 
 const HomeScreen = () => {
   return (
     <SafeAreaView>
-      <Text>HomeScreen</Text>
+      <View style={{
+        backgroundColor: 'red',
+        width: deviceWidth,
+        height: deviceWidth * 0.3
+      }}>
+        <ProductHeader />
+      </View>
     </SafeAreaView>
   )
 }

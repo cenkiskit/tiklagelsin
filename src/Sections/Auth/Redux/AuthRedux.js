@@ -2,13 +2,14 @@ export const NS = 'auth';
 
 const INITIAL_STATE = {
     data: null,
-    loginData: null
+    loginData: undefined
 }
 
 export const Types = {
     SET_DATA: NS + '/set-data',
     SET_TOKEN: NS + '/set-token',
-    FETCH_LOGIN: NS + '/fetch-login'
+    FETCH_LOGIN: NS + '/fetch-login',
+    FETCH_INITIAL: NS + '/fetch-initial'
 };
 
 export const Selectors = {
@@ -28,6 +29,10 @@ export const ActionCreators = {
     fetchLogin: (data) => ({
         type: Types.FETCH_LOGIN,
         payload: data
+    }),
+    fetchInitial: (data) => ({
+        type: Types.FETCH_INITIAL,
+        payload: data
     })
 };
 
@@ -44,6 +49,10 @@ export const Reducer = (state = INITIAL_STATE, action) => {
                 loginData: action.payload
             }
         case Types.FETCH_LOGIN:
+            return {
+                ...state
+            }
+        case Types.FETCH_INITIAL:
             return {
                 ...state
             }

@@ -6,11 +6,11 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View
 } from 'react-native';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import RootNavigator from './src/Navigation/RootNavigator';
 import createStore from './src/Redux/CreateStore';
 

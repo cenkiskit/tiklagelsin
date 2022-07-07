@@ -5,5 +5,6 @@ export const ScreenNames = {
     HOME: {
         HOME_SCREEN: 'home-screen',
         BASKET_SCREEN: 'basket-screen'
-    }
+    },
+    INITIAL_LOADING_SCREEN: 'initial-loading-screen'
 }

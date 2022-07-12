@@ -1,8 +1,21 @@
-import { View, Text, Image,TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from './Styles/ProductItemStyles'
+import { useDispatch } from 'react-redux'
+import { BasketActions } from '../../Basket'
 
-const ProductItem = () => {
+const ProductItem = (props) => {
+    const { product } = props
+    const dispatch = useDispatch()
+
+    const renderContent = () => {
+        let description = ""
+        product.contents.map((element, index) => {
+            description += index !== product.contents.length - 1 ? element + ", " : element
+        })
+        return description
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -14,14 +27,16 @@ const ProductItem = () => {
             </View>
             <View style={styles.detailsContainer}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.title}>Menu 1</Text>
-                    <Text style={styles.description}>İçindekiler:Salatalık, Domates</Text>
+                    <Text style={styles.title}>{product.title}</Text>
+                    <Text style={styles.description}>İçindekiler:{renderContent()}</Text>
                 </View>
 
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>3TL Sepete Ekle</Text>
+                <TouchableOpacity
+                    onPress={() => dispatch(BasketActions.addBasket(product))}
+                    style={styles.button}>
+                    <Text style={styles.buttonText}>{product.price}TL Sepete Ekle</Text>
                 </TouchableOpacity>
 
             </View>

@@ -1,8 +1,12 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from './Styles/ProductHeaderStyles'
+import { useSelector } from 'react-redux'
+import { BasketSelectors } from '../../Basket'
 
 const ProductHeader = () => {
+    const basketSize = useSelector(BasketSelectors.basketSize)
+
     return (
         <View style={styles.container}>
             <View style={styles.leftIconContainer}>
@@ -16,7 +20,9 @@ const ProductHeader = () => {
             </View>
             <View style={styles.rightIconContainer}>
                 <TouchableOpacity style={styles.rightIconImageContainer}>
-                    <Text style={styles.countText}>1</Text>
+                    <Text style={styles.countText}>
+                        {basketSize}
+                    </Text>
                     <Image style={styles.image} source={require('../../../Assets/Images/shopping-basket.png')} />
                 </TouchableOpacity>
 

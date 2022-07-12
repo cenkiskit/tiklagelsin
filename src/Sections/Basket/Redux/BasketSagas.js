@@ -1,12 +1,14 @@
 import { takeEvery, fork } from 'redux-saga/effects';
+import { Types as BasketTypes } from './BasketRedux';
 
 function* watchBasket() {
-    yield takeEvery(HomeTypes.FETCH_PROGRESS, workerBasket);
+    yield takeEvery(BasketTypes.FETCH_BASKET, workerBasket);
 }
 
 function* workerBasket(action) {
     try {
-
+        console.log('actin')
+        console.log('actions:', action.payload)
     } catch (error) {
 
     }

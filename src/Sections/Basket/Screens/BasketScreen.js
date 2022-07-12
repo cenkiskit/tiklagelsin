@@ -21,10 +21,13 @@ const BasketScreen = () => {
 
     const renderContent = () => {
         if (Object.keys(basketData).length > 0) {
-            return <View>
-                <FlatList data={Object.keys(basketData)}
-                    renderItem={renderItem} />
-            </View>
+            return <>
+                <View>
+                    <FlatList data={Object.keys(basketData)}
+                        renderItem={renderItem} />
+                </View>
+                <Price basketData={basketData} />
+            </>
         } else {
             return <View style={styles.blankContainer}>
                 <Text style={styles.blankText}>Sepetinizde Ürün Bulunmamaktadır.</Text>
@@ -36,7 +39,7 @@ const BasketScreen = () => {
         <SafeAreaView style={styles.container}>
             <BasketHeader />
             {renderContent()}
-            <Price />
+
         </SafeAreaView>
     )
 }

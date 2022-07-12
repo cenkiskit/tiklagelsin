@@ -9,7 +9,8 @@ export const Types = {
     SET_DATA: NS + '/set-data',
     SET_TOKEN: NS + '/set-token',
     FETCH_LOGIN: NS + '/fetch-login',
-    FETCH_INITIAL: NS + '/fetch-initial'
+    FETCH_INITIAL: NS + '/fetch-initial',
+    FETCH_LOGOUT: NS + '/fetch-logout'
 };
 
 export const Selectors = {
@@ -33,6 +34,10 @@ export const ActionCreators = {
     fetchInitial: (data) => ({
         type: Types.FETCH_INITIAL,
         payload: data
+    }),
+    fetchLogout: (data) => ({
+        type: Types.FETCH_LOGOUT,
+        payload: data
     })
 };
 
@@ -55,6 +60,11 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         case Types.FETCH_INITIAL:
             return {
                 ...state
+            }
+        case Types.FETCH_LOGOUT:
+            return {
+                ...state,
+                loginData: undefined
             }
         default:
             return state;

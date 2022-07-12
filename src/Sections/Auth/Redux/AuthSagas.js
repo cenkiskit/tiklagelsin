@@ -7,6 +7,15 @@ function* watchAuth() {
     yield takeEvery(AuthTypes.FETCH_LOGIN, workerAuth);
 }
 
+function* watchLogout() {
+    yield takeEvery(AuthTypes.FETCH_LOGOUT, workerLogout);
+}
+
+function* workerLogout() {
+    yield AsyncStorage.removeItem("@TGToken")
+    yield put(AuthActions.setToken(null))
+}
+
 function* watchInitial() {
     yield takeEvery(AuthTypes.FETCH_INITIAL, workerInitial);
 }
@@ -26,7 +35,6 @@ function* workerInitial(action) {
 
 function* workerAuth(action) {
     try {
-        console.log('buraya geliyr mu')
         const loginData = action.payload
         yield AsyncStorage.setItem("@TGToken", JSON.stringify(loginData))
         yield put(AuthActions.setToken(loginData))
@@ -37,5 +45,6 @@ function* workerAuth(action) {
 
 export const Sagas = [
     fork(watchAuth),
-    fork(watchInitial)
+    fork(watchInitial),
+    fork(watchLogout)
 ];

@@ -20,7 +20,7 @@ const InitialLoadingScreen = () => {
 
     useEffect(() => {
         if (loginData === null) {
-            navigation.navigate(ScreenNames.AUTH.LOGIN_SCREEN)
+            navigation.replace(ScreenNames.AUTH.LOGIN_SCREEN)
         }
     }, [loginData])
 

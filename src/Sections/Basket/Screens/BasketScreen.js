@@ -10,6 +10,7 @@ import { deviceWidth } from '../../../Constants/Layout'
 import Price from '../Components/Price'
 import { styles } from '../Styles/BasketScreenStyles'
 import Button from '../../../Components/Button'
+import EmptyComponent from '../../../Components/EmptyComponent'
 
 const BasketScreen = () => {
     const basketData = useSelector(BasketSelectors.basket)
@@ -45,9 +46,7 @@ const BasketScreen = () => {
 
             </>
         } else {
-            return <View style={styles.blankContainer}>
-                <Text style={styles.blankText}>Sepetinizde Ürün Bulunmamaktadır.</Text>
-            </View>
+            return <EmptyComponent text="Sepetinizde ürün bulunmamaktadır." />
         }
     }
 

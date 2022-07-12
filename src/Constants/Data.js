@@ -40,7 +40,7 @@ export const products = [
         id: "6",
         title: "Menu 7",
         image: "",
-        contents: ["Salatalık", "Domates"],
+        contents: ["Salatalık", "Soğan"],
         price: "54"
     }, {
         id: "7",

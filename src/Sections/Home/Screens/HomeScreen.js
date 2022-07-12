@@ -26,7 +26,7 @@ const HomeScreen = () => {
           onChange={_onChangeSearch}
           value={searchText} />
       </View>
-      <ProductList />
+      <ProductList filterText={searchText} />
     </SafeAreaView>
   )
 }

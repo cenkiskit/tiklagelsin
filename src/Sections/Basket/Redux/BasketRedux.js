@@ -9,7 +9,8 @@ const INITIAL_STATE = {
 export const Types = {
     SET_DATA: NS + '/set-data',
     SET_BASKET: NS + '/set-basket',
-    FETCH_BASKET: NS + '/fetch-basket'
+    FETCH_BASKET: NS + '/fetch-basket',
+    ADD_PRODUCT: NS + '/add-product'
 };
 
 export const Selectors = {
@@ -30,11 +31,14 @@ export const ActionCreators = {
     addBasket: (data) => ({
         type: Types.FETCH_BASKET,
         payload: data
+    }),
+    addProduct: (data) => ({
+        type: Types.ADD_PRODUCT,
+        payload: data
     })
 };
 
 export const Reducer = (state = INITIAL_STATE, action) => {
-    console.log('action payload:', action.type)
     switch (action.type) {
         case Types.SET_DATA:
             return {
@@ -45,9 +49,13 @@ export const Reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 basket: action.payload.data,
-                basketSize: action.payload.size + 1
+                basketSize: action.payload.size
             }
         case Types.FETCH_BASKET:
+            return {
+                ...state
+            }
+        case Types.ADD_PRODUCT:
             return {
                 ...state
             }

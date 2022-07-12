@@ -1,12 +1,13 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { styles } from './Styles/ProductItemStyles'
+import { styles } from './Styles/BasketItemStyles'
 import { useDispatch } from 'react-redux'
 import { BasketActions } from '../../Basket'
+import { deviceWidth } from '../../../Constants/Layout'
 import { BasketOperations } from '../../../Constants/Values'
 
-const ProductItem = (props) => {
-    const { product } = props
+const BasketItem = (props) => {
+    const { product, size } = props
     const dispatch = useDispatch()
 
     const renderContent = () => {
@@ -15,6 +16,14 @@ const ProductItem = (props) => {
             description += index !== product.contents.length - 1 ? element + ", " : element
         })
         return description
+    }
+
+    const addProduct = () => {
+        dispatch(BasketActions.addBasket({ product: product, basketType: BasketOperations.ADD_PRODUCT }))
+    }
+
+    const deleteProduct = () => {
+        dispatch(BasketActions.addBasket({ product: product, basketType: BasketOperations.DELETE_PRODUCT }))
     }
 
     return (
@@ -33,19 +42,21 @@ const ProductItem = (props) => {
                 </View>
 
             </View>
-            <View style={styles.buttonContainer}>
+            <View style={styles.sizeContainer}>
                 <TouchableOpacity
-                    onPress={() => {
-                        console.log('clicked.')
-                        dispatch(BasketActions.addBasket({ product: product, basketType: BasketOperations.ADD_PRODUCT }))
-                    }}
-                    style={styles.button}>
-                    <Text style={styles.buttonText}>{product.price}TL Sepete Ekle</Text>
+                    onPress={() => addProduct()}
+                    style={styles.addButton}>
+                    <Text>+</Text>
                 </TouchableOpacity>
-
+                <Text style={styles.sizeText}>{size}Adet</Text>
+                <TouchableOpacity
+                    onPress={() => deleteProduct()}
+                    style={styles.addButton}>
+                    <Text>-</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
 }
 
-export default ProductItem
+export default BasketItem

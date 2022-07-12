@@ -34,7 +34,10 @@ const ProductItem = (props) => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={() => dispatch(BasketActions.addBasket(product))}
+                    onPress={() => {
+                        console.log('clicked.')
+                        dispatch(BasketActions.addBasket(product))
+                    }}
                     style={styles.button}>
                     <Text style={styles.buttonText}>{product.price}TL Sepete Ekle</Text>
                 </TouchableOpacity>

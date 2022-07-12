@@ -16,8 +16,18 @@ function* workerBasket(action) {
 
 function* workerAddProduct(product) {
     try {
-        const size = yield select(BasketSelectors.basketSize)
-        yield put(ActionCreators.setBasket({ data: product, size: size }))
+        const basketSize = yield select(BasketSelectors.basketSize)
+        const productInBasket = yield select(BasketSelectors.basket)
+        let id = product.id
+
+        let newAdded = structuredClone(productInBasket)
+        if (newAdded[`${id}`]) {
+            newAdded[`${id}`] = newAdded[`${id}`] + 1
+        } else {
+            newAdded[`${id}`] = 1
+        }
+
+        yield put(ActionCreators.setBasket({ data: structuredClone(newAdded), size: basketSize }))
     } catch (error) {
 
     }

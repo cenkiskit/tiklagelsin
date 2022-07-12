@@ -2,7 +2,7 @@ export const NS = 'basket';
 
 const INITIAL_STATE = {
     data: null,
-    basket: null,
+    basket: {},
     basketSize: 0
 }
 
@@ -34,7 +34,7 @@ export const ActionCreators = {
 };
 
 export const Reducer = (state = INITIAL_STATE, action) => {
-    console.log('action payload:', action.payload)
+    console.log('action payload:', action.type)
     switch (action.type) {
         case Types.SET_DATA:
             return {

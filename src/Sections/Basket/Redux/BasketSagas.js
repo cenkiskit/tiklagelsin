@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { takeEvery, fork, select, put, call } from 'redux-saga/effects';
 import { BasketSelectors } from '..';
 import { BasketOperations } from '../../../Constants/Values';
@@ -22,12 +23,13 @@ function* workerAddOrDeleteProduct(payload) {
 
         const productInBasket = yield select(BasketSelectors.basket)
         const result = yield call(workerAddDeleteOperations, productInBasket, type, product)
-
-        yield put(ActionCreators.setBasket({
+        const resultOfBasket = {
             data: structuredClone(result.newAdded),
             size: result.basketSize,
             basketPrice: result.basketPrice
-        }))
+        }
+        yield AsyncStorage.setItem("@TGBasket", JSON.stringify(resultOfBasket))
+        yield put(ActionCreators.setBasket(resultOfBasket))
     } catch (error) {
 
     }

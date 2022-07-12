@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { takeEvery, fork, put, select } from 'redux-saga/effects';
 import { AuthActions, AuthSelectors } from '..';
+import { BasketActions } from '../../Basket';
 import { Types as AuthTypes } from './AuthRedux';
 
 function* watchAuth() {
@@ -24,6 +25,10 @@ function* workerInitial(action) {
     try {
         const token = yield AsyncStorage.getItem("@TGToken")
         if (token) {
+            const basket = yield AsyncStorage.getItem('@TGBasket')
+            if (basket) {
+                yield put(BasketActions.setBasket(JSON.parse(basket)))
+            }
             yield put(AuthActions.setToken(JSON.parse(token)))
         } else {
             yield put(AuthActions.setToken(null))

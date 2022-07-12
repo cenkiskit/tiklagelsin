@@ -35,7 +35,11 @@ function* workerAddProduct(payload) {
         } else {
             basketSize = basketSize - 1
             if (newAdded[`${id}`]) {
-                newAdded[`${id}`] = newAdded[`${id}`] - 1
+                if (newAdded[`${id}`] - 1 === 0) {
+                    delete newAdded[`${id}`]
+                } else {
+                    newAdded[`${id}`] = newAdded[`${id}`] - 1
+                }
             }
         }
 

@@ -15,7 +15,7 @@ const BasketHeader = () => {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={styles.leftIconImageContainer}>
-                    <Image style={styles.image} source={require('../../../Assets/Images/exit-2.png')} />
+                    <Image style={styles.image} source={require('../../../Assets/Images/left.png')} />
                 </TouchableOpacity>
 
             </View>

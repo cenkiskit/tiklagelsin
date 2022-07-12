@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux'
 import { BasketSelectors } from '..'
 import BasketItem from '../Components/BasketItem'
 import { products } from '../../../Constants/Data'
+import { deviceWidth } from '../../../Constants/Layout'
+import Price from '../Components/Price'
+import { styles } from '../Styles/BasketScreenStyles'
 
 const BasketScreen = () => {
     const basketData = useSelector(BasketSelectors.basket)
@@ -15,12 +18,24 @@ const BasketScreen = () => {
         return <BasketItem product={product} size={basketData[`${item.item}`]} />
     }
 
-    return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-            <BasketHeader title="Sepet" />
+    const renderContent = () => {
+        if (Object.keys(basketData).length > 0) {
+            return <View>
+                <FlatList data={Object.keys(basketData)}
+                    renderItem={renderItem} />
+            </View>
+        } else {
+            return <View style={styles.blankContainer}>
+                <Text style={styles.blankText}>Sepetinizde Ürün Bulunmamaktadır.</Text>
+            </View>
+        }
+    }
 
-            <FlatList data={Object.keys(basketData)}
-                renderItem={renderItem} />
+    return (
+        <SafeAreaView style={styles.container}>
+            <BasketHeader />
+            {renderContent()}
+            <Price />
         </SafeAreaView>
     )
 }

@@ -4,10 +4,9 @@ import { deviceWidth } from "../../../../Constants/Layout";
 export const styles = StyleSheet.create({
     container: {
         marginLeft: deviceWidth * 0.05,
-        marginTop: deviceWidth * 0.1,
         width: deviceWidth * 0.5,
-        flex: 1,
-        maxHeight: deviceWidth * 0.4,
+        height: deviceWidth*0.5,
+        maxHeight: deviceWidth * 0.4
     },
     textContainer: {
         flex: 1,

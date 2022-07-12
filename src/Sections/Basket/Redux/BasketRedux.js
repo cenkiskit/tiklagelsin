@@ -3,7 +3,8 @@ export const NS = 'basket';
 const INITIAL_STATE = {
     data: null,
     basket: {},
-    basketSize: 0
+    basketSize: 0,
+    basketPrice: 0
 }
 
 export const Types = {
@@ -16,7 +17,8 @@ export const Types = {
 export const Selectors = {
     data: state => state[NS].data,
     basket: state => state[NS].basket,
-    basketSize: state => state[NS].basketSize
+    basketSize: state => state[NS].basketSize,
+    basketPrice: state => state[NS].basketPrice
 };
 
 export const ActionCreators = {
@@ -49,7 +51,8 @@ export const Reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 basket: action.payload.data,
-                basketSize: action.payload.size
+                basketSize: action.payload.size,
+                basketPrice: action.payload.basketPrice
             }
         case Types.FETCH_BASKET:
             return {

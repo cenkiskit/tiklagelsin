@@ -15,7 +15,8 @@ const BasketScreen = () => {
 
     const renderItem = (item) => {
         const product = products.find(({ id }) => id == item.item)
-        return <BasketItem product={product} size={basketData[`${item.item}`]} />
+        const size = basketData[`${item.item}`]
+        return <BasketItem product={product} size={size} />
     }
 
     const renderContent = () => {

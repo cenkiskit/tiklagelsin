@@ -9,45 +9,65 @@ function* watchBasket() {
 
 function* workerBasket(action) {
     try {
-        yield call(workerAddProduct, action.payload)
+        yield call(workerAddOrDeleteProduct, action.payload)
     } catch (error) {
 
     }
 }
 
-function* workerAddProduct(payload) {
+function* workerAddOrDeleteProduct(payload) {
     try {
         const product = payload.product
         const type = payload.basketType
 
-        let basketSize = yield select(BasketSelectors.basketSize)
         const productInBasket = yield select(BasketSelectors.basket)
-        let id = product.id
+        const result = yield call(workerAddDeleteOperations, productInBasket, type, product)
 
-        let newAdded = structuredClone(productInBasket)
-        if (type === BasketOperations.ADD_PRODUCT) {
-            basketSize = basketSize + 1
-            if (newAdded[`${id}`]) {
-                newAdded[`${id}`] = newAdded[`${id}`] + 1
-            } else {
-                newAdded[`${id}`] = 1
-            }
-        } else {
-            basketSize = basketSize - 1
-            if (newAdded[`${id}`]) {
-                if (newAdded[`${id}`] - 1 === 0) {
-                    delete newAdded[`${id}`]
-                } else {
-                    newAdded[`${id}`] = newAdded[`${id}`] - 1
-                }
-            }
-        }
-
-        yield put(ActionCreators.setBasket({ data: structuredClone(newAdded), size: basketSize }))
+        yield put(ActionCreators.setBasket({
+            data: structuredClone(result.newAdded),
+            size: result.basketSize,
+            basketPrice: result.basketPrice
+        }))
     } catch (error) {
 
     }
 }
+
+function* workerAddDeleteOperations(productInBasket, type, product) {
+    let id = product.id
+    let basketSize = yield select(BasketSelectors.basketSize)
+    let basketPrice = yield select(BasketSelectors.basketPrice)
+    basketPrice = parseFloat(basketPrice)
+    let newAdded = structuredClone(productInBasket)
+
+    if (type === BasketOperations.ADD_PRODUCT) {
+        basketSize = basketSize + 1
+        basketPrice += parseFloat(product.price)
+        if (newAdded[`${id}`]) {
+            newAdded[`${id}`] = newAdded[`${id}`] + 1
+        } else {
+            newAdded[`${id}`] = 1
+        }
+    } else {
+        if (newAdded[`${id}`]) {
+            basketSize = basketSize - 1
+            basketPrice -= parseFloat(product.price)
+
+            if (newAdded[`${id}`] - 1 === 0) {
+                delete newAdded[`${id}`]
+            } else {
+                newAdded[`${id}`] = newAdded[`${id}`] - 1
+            }
+        }
+    }
+
+    return {
+        newAdded: newAdded,
+        basketSize: basketSize,
+        basketPrice: basketPrice
+    }
+}
+
 
 export const Sagas = [
     fork(watchBasket)

@@ -25,6 +25,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>tiklagelsin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>app</string>

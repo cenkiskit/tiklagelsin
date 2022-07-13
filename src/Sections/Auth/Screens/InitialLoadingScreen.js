@@ -17,20 +17,16 @@ const InitialLoadingScreen = () => {
 
     useEffect(() => {
         Linking.addEventListener('url', handleOpenURL)
-        Linking.getInitialURL().then(url => {
-            console.log('URL:', url)
-          });
         setTimeout(() => {
             dispatch(AuthActions.fetchInitial())
         }, 1000);
     }, [])
 
-    const handleOpenURL = ({event}) => {
-        const url = event.url
+    const handleOpenURL = (event) => {
+        const url = event?.url ? event.url : event
         if (url) {
-            const productId = url.split("tiklagelsin?id=")[1]
+            const productId = url.split("tiklagelsin/id=")[1]
             const product = products.find(x => x.id == productId)
-            console.log('productExist', product)
             if (product) {
                 dispatch(BasketActions.addBasket({ product: product, basketType: BasketOperations.ADD_PRODUCT }))
             }

@@ -23,8 +23,9 @@ function* workerAddOrDeleteProduct(payload) {
 
         const productInBasket = yield select(BasketSelectors.basket)
         const result = yield call(workerAddDeleteOperations, productInBasket, type, product)
+
         const resultOfBasket = {
-            data: structuredClone(result.newAdded),
+            data: result.newAdded,
             size: result.basketSize,
             basketPrice: result.basketPrice
         }
@@ -39,8 +40,10 @@ function* workerAddDeleteOperations(productInBasket, type, product) {
     let id = product.id
     let basketSize = yield select(BasketSelectors.basketSize)
     let basketPrice = yield select(BasketSelectors.basketPrice)
+    // structuredClone(productInBasket)
     basketPrice = parseFloat(basketPrice)
-    let newAdded = structuredClone(productInBasket)
+
+    let newAdded = productInBasket
 
     if (type === BasketOperations.ADD_PRODUCT) {
         basketSize = basketSize + 1

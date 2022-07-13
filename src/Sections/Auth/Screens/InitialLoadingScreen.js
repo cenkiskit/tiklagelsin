@@ -1,10 +1,13 @@
-import { View, Image } from 'react-native'
+import { View, Image, Linking } from 'react-native'
 import React, { useEffect } from 'react'
 import { styles } from '../Styles/InitialLoadingScreenStyles'
 import { AuthActions, AuthSelectors } from '..'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { ScreenNames } from '../../../Constants/ScreenNames'
+import { products } from '../../../Constants/Data'
+import { BasketOperations } from '../../../Constants/Values'
+import { BasketActions } from '../../Basket'
 
 const InitialLoadingScreen = () => {
 
@@ -13,10 +16,26 @@ const InitialLoadingScreen = () => {
     const navigation = useNavigation()
 
     useEffect(() => {
+        Linking.addEventListener('url', handleOpenURL)
+        Linking.getInitialURL().then(url => {
+            console.log('URL:', url)
+          });
         setTimeout(() => {
             dispatch(AuthActions.fetchInitial())
         }, 1000);
     }, [])
+
+    const handleOpenURL = ({event}) => {
+        const url = event.url
+        if (url) {
+            const productId = url.split("tiklagelsin?id=")[1]
+            const product = products.find(x => x.id == productId)
+            console.log('productExist', product)
+            if (product) {
+                dispatch(BasketActions.addBasket({ product: product, basketType: BasketOperations.ADD_PRODUCT }))
+            }
+        }
+    }
 
     useEffect(() => {
         if (loginData === null) {

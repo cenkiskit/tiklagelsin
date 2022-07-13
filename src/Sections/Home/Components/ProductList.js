@@ -13,7 +13,7 @@ const ProductList = (props) => {
         products.map((product) => {
             product.contents.map((content) => {
                 const isContains = filteredProducts.find(item => item.id == product.id)
-                if (!isContains & content.includes(filterText)) {
+                if (!isContains & content.toLowerCase().includes(filterText.toLowerCase())) {
                     filteredProducts.push(product)
                 }
             })

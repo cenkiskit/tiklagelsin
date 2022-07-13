@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput } from 'react-native'
+import { View, Text, Image, TextInput, Platform } from 'react-native'
 import React from 'react'
 import { deviceWidth } from '../../../Constants/Layout'
 import { styles } from './Styles/SearchStyles'
@@ -15,6 +15,7 @@ const Search = (props) => {
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput
+                        style={{ padding: Platform.OS === 'android' ? deviceWidth * 0.001 : 0 }}
                         placeholder='Arama Yap'
                         placeholderTextColor={'black'}
                         onChangeText={(text) => onChange(text)}

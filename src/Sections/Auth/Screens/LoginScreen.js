@@ -12,9 +12,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const LoginScreen = () => {
 
-    const [mail, setMail] = useState("cenk.iskit1@gmail.com")
-    const [password, setPassword] = useState("12345")
-    const [wrognEmail, setWrongEmail] = useState(false)
+    const [mail, setMail] = useState("")
+    const [password, setPassword] = useState("")
+    const [wrongEmail, setWrongEmail] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -36,7 +36,7 @@ const LoginScreen = () => {
     const _onBlurMail = () => {
         const isMail = isEmail(mail)
         if (isMail) {
-            wrognEmail ? setWrongEmail(false) : null
+            wrongEmail ? setWrongEmail(false) : null
         } else {
             setWrongEmail(true)
         }
@@ -47,7 +47,7 @@ const LoginScreen = () => {
     }
 
     const isButtonDisabled = () => {
-        if (mail && password) return false
+        if (!wrongEmail && mail && password) return false
         return true
     }
 
@@ -66,7 +66,7 @@ const LoginScreen = () => {
                             placeholder="E-mail"
                             onChangeText={_onChangeEmail}
                             value={mail}
-                            wrong={wrognEmail}
+                            wrong={wrongEmail}
                             onBlur={_onBlurMail}
                             onFocus={_onFocusMail} />
                     </View>
